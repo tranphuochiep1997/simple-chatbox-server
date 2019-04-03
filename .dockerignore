@@ -1,0 +1,8 @@
+node_modules
+*.log
+.git
+.gitignore
+.DS_Store
+.idea/
+yarn.lock
+docs/

@@ -1,0 +1,9 @@
+{
+  "name": "Nodejs base",
+  "version": "1.0.0",
+  "description": "Nodejs base API",
+  "template": {
+    "withCompare": false,
+    "withGenerator": false
+  }
+}
