@@ -4,14 +4,14 @@
  * @apiDescription Login
  * @apiGroup Auth
  *
- * @apiParam {string} email Email
+ * @apiParam {string} username Username
  * @apiParam {string} password Password
  *
  * @apiSuccess (200) {Boolean} success=true status of response
  * @apiSuccess (200) {Object} result result of response
  * @apiSuccess (200) {Number} result.user.id id of user
  * @apiSuccess (200) {String} result.user user's info
- * @apiSuccess (200) {String} result.user.email user's email
+ * @apiSuccess (200) {String} result.user.username user's username
  * @apiSuccess (200) {String} result.user.name user's name
  * @apiSuccess (200) {Number} result.user.role role of user
  * @apiSuccess (200) {String} result.accessToken token used for other requests
@@ -22,7 +22,7 @@
  *  "result": {
  *    "user": {
  *      "id": 126,
- *      "email": "fashion@bap.jp",
+ *      "username": "tranphuochiep",
  *      "name": "nguyen van a",
  *      "role": 1
  *     },
@@ -60,7 +60,7 @@
  * @apiDescription  Register new account
  * @apiGroup Auth
  *
- * @apiParam {string} email Email
+ * @apiParam {string} username Username
  * @apiParam {string} password Password
  * 
  * @apiSuccess (200) {Boolean} success=true status of response

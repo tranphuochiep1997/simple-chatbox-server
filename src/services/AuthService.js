@@ -18,7 +18,7 @@ class AuthService {
   async register({ username, password, name }) {
     try {
 
-      /** Check email used */
+      /** Check username used */
       let user = await this.userRepository.getByUsername(username);
       if (user) {
         return jsonError(errors.USERNAME_EXISTED);
@@ -28,7 +28,7 @@ class AuthService {
       password = await hashPassword(password);
 
       /** Create user */
-      await this.userRepository.create({ email, password, name });
+      await this.userRepository.create({ username, password, name });
 
       return jsonSuccess();
     } catch (e) {
