@@ -55,10 +55,10 @@ class Repository {
    *
    * @param {Number} page page
    * @param {Number} limit number of records
-   * @param {Number} where where
-   * @param {Number} include association
-   * @param {Number} order sort order
-   * @param {Number} attributes columns
+   * @param {Object} where where
+   * @param {Object} include association
+   * @param {Object} order sort order
+   * @param {Object} attributes columns
    */
   async getAll({ page = 0, limit, where = {}, include = [], order = [['id', 'DESC']], attributes = {} }) {
     try {

@@ -7,20 +7,21 @@ const socketHandler = (io) => {
 }
 
 const onConnect = (socket) => {
-  console.log(`User connected: ${socket.id}`);
   const { ownerId } = socket.principal;
 
-  socket.on('message', async ({ body }) => {
-    
-    /** Save db */
-    const response = await messageService.create({ ownerId, body });
-    if (response.success) {
-      socket.emit('message', response.result);
-    }
-  });
+  socket.on('message', (body) => {
 
-  socket.on('disconnect', () => {
-    console.log(`User disconnect: ${socket.id}`);
+    if (body) {
+    /** Save db */
+    messageService.create({ ownerId, body })
+      .then(response => {
+        if(response.success) {
+          return socket.emit('message', response.result);
+        }
+
+        throw new Error(JSON.stringify(response));
+      })
+    }
   });
 };
 

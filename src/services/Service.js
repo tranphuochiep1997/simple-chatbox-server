@@ -32,7 +32,7 @@ class Service {
 
   async create(model) {
     try {
-      let result = await this.baseRepository.create(model);
+      const result = await this.baseRepository.create(model);
       return jsonSuccess(result);
     } catch (e) {
       throw e;
