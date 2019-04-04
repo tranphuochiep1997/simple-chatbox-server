@@ -1,4 +1,5 @@
 const { socketAuthenticated } = require('../../middlewares/policies');
+const messageService = require('../../services/MessageService');
 
 const socketHandler = (io) => {
   io.use(socketAuthenticated());
@@ -7,15 +8,15 @@ const socketHandler = (io) => {
 
 const onConnect = (socket) => {
   console.log(`User connected: ${socket.id}`);
+  const { ownerId } = socket.principal;
 
-  socket.emit('message', { message: 'Hello client' });
-
-  socket.emit('give-me-a-message', { condition: 'in-capital' }, (messageFromClient) => {
-    console.log(messageFromClient);
-  });
-
-  socket.on('message', data => {
-    console.log(data);
+  socket.on('message', async ({ body }) => {
+    
+    /** Save db */
+    const response = await messageService.create({ ownerId, body });
+    if (response.success) {
+      socket.emit('message', response.result);
+    }
   });
 
   socket.on('disconnect', () => {
