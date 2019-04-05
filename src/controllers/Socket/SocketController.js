@@ -3,10 +3,10 @@ const messageService = require('../../services/MessageService');
 
 const socketHandler = (io) => {
   io.use(socketAuthenticated());
-  io.on('connection', onConnect);
+  io.on('connection', socket => onConnect({ socket, io }));
 }
 
-const onConnect = (socket) => {
+const onConnect = ({ socket, io }) => {
   const { ownerId } = socket.principal;
 
   socket.on('message', (body) => {
@@ -16,7 +16,7 @@ const onConnect = (socket) => {
     messageService.create({ ownerId, body })
       .then(response => {
         if(response.success) {
-          return socket.emit('message', response.result);
+          return io.emit('message', response.result);
         }
 
         throw new Error(JSON.stringify(response));
